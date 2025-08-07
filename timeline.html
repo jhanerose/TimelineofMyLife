@@ -136,6 +136,8 @@
 }
 
     .card {
+    margin: 0 auto;
+    max-width: 90%;
     padding: 1rem;
     border-radius: 12px;
     background: linear-gradient(135deg, #f7c1ff, #c5c7ff, #b3e0ff, #ffc1f3);
@@ -185,8 +187,7 @@
         width: 100%;
         left: 0 !important;
         text-align: left;
-        padding-left: 2rem;
-        padding-right: 2rem;
+        padding: 1rem;
         margin: 2rem 0;
         z-index: 1;
       }
@@ -198,19 +199,30 @@
       .event::before {
         position: relative;
         top: auto;
-        left: 0;
+        left: 50%;
         right: auto;
-        display: block;
+        transform: translateX(-50%);
+        display: inline-block;
+        width: 100%;
         margin-bottom: 0.5rem;
-        text-align: left;
+        padding: 0.5rem 0;
+        text-align: center;
         transform: none;
+        font-size: 0.95rem;
+        white-space: nowrap;
       }
 
       .timeline::after {
-        bottom: 0;
-        top: 0;
-        height: auto;
+        left: 10px;
+        width: 2px;
       }
+      .event.left::before,
+      .event.right::before {
+        left: auto;
+        right: auto;
+        transform: translateX(-50%);
+      }
+
       @keyframes glowIn {
   0% {
     box-shadow: 0 0 0 rgba(255, 255, 255, 0);
