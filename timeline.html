@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Timeline of My Life - Jhane Rose Sadicon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" type="port/png" href="port/timeline.png">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to bottom, #040525ff, #100036ff);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 2rem 0 0.5rem 0;
+      font-size: 2.5rem;
+      font-weight: bold;
+      animation: pastelShift 6s infinite alternate;
+      background: linear-gradient(45deg, #f7c1ff, #c5c7ff, #b3e0ff, #ffc1f3);
+      background-size: 300% 300%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+}
+
+    p {
+      text-align: justify;
+}
+
+
+    .byline {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: -0.5rem;
+      margin-bottom: 2rem;
+      font-weight: bold;
+      animation: pastelShift 6s infinite alternate;
+      background: linear-gradient(45deg, #f7c1ff, #c5c7ff, #b3e0ff, #ffc1f3);
+      background-size: 300% 300%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+}
+
+    @keyframes pastelShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+}
+
+    .timeline {
+      position: relative;
+      margin: 0 auto;
+      padding: 2rem;
+      max-width: 1000px;
+}
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, #e0bbf9, #cba7f5, #a3c4f3, #b0f4e6);
+      background-size: 400% 400%;
+      animation: colorFlow 15s ease infinite;
+}
+
+    .event {
+      position: relative;
+      width: 50%;
+      padding: 1rem;
+      box-sizing: border-box;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards;
+}
+
+    .event:nth-child(even) {
+      animation-delay: 0.3s;
+}
+
+    .event.left {
+      left: 0;
+      text-align: right;
+}
+
+    .event.right {
+      left: 50%;
+      text-align: left;
+}
+
+    .event::before {
+      content: attr(data-date);
+      position: absolute;
+      top: 1rem;
+      min-width: 140px; /* wider to allow horizontal layout */
+      font-size: 0.95rem;
+      padding: 0.5rem 0.8rem;
+      border-radius: 5px;
+      font-weight: bold;
+      background: linear-gradient(45deg, #f7c1ff, #c5c7ff, #b3e0ff, #ffc1f3);
+      background-size: 300% 300%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: pastelShift 6s infinite alternate;
+      text-align: center; /* center looks better for short date */
+      white-space: nowrap; /* allow wrapping */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0;
+      border-radius: 0;
+      margin-bottom: 0.5rem;
+}
+
+
+    .event.visible::before {
+      animation: pastelShift 6s infinite alternate, glowIn 1s ease forwards;
+}
+
+    .event.left::before {
+      right: -150px;
+}
+
+    .event.right::before {
+      left: -150px;
+}
+
+    .card {
+    padding: 1rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f7c1ff, #c5c7ff, #b3e0ff, #ffc1f3);
+    background-size: 300% 300%;
+    animation: pastelShift 6s infinite alternate;
+    color: #333;
+    box-shadow: 0 0 20px rgba(200, 180, 255, 0.5);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+
+    .card:hover {
+      transform: scale(1.015);
+      box-shadow: 0 0 25px rgba(255, 182, 193, 0.7);
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      transition: transform 0.4s ease;
+    }
+
+    .card img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes colorFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .event {
+        width: 100%;
+        left: 0 !important;
+        text-align: left;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        margin: 2rem 0;
+        z-index: 1;
+      }
+
+      .event:hover {
+        z-index: 2;
+      }
+
+      .event::before {
+        position: relative;
+        top: auto;
+        left: 0;
+        right: auto;
+        display: block;
+        margin-bottom: 0.5rem;
+        text-align: left;
+        transform: none;
+      }
+
+      .timeline::after {
+        bottom: 0;
+        top: 0;
+        height: auto;
+      }
+      @keyframes glowIn {
+  0% {
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.7);
+  }
+}
+
+    }
+  </style>
+</head>
+<body>
+  <h1>Timeline of My Life</h1>
+  <div class="byline">by Jhane Rose Sadicon</div>
+  <div class="timeline">
+    <div class="event left" data-date="Sep 23, 2005">
+      <div class="card">
+        <img src="port/01.jpg" alt="Humble Beginnings" />
+        <h2>Humble Beginnings</h2>
+        <p>As the eldest daughter, I felt the weight of responsibility to set an example—expected to be the role model and the dependable achiever. From a young age, I was consistently recognized for my academic performance, balancing family expectations with a growing curiosity for learning and excellence.</p>
+      </div>
+    </div>
+
+    <div class="event right" data-date="Feb 04, 2023">
+      <div class="card">
+        <img src="port/02.gif" alt="Television Feature" loading="lazy" />
+        <h2>Television Feature</h2>
+        <p>I was featured on ABS-CBN News TV Patrol and GMA’s 24 Oras during the RoboSports Tournament 2023 held at De La Salle Medical and Health Sciences Institute, showcasing my early involvement in robotics.</p>
+      </div>
+    </div>
+
+    <div class="event left" data-date="Mar 23, 2023">
+      <div class="card">
+        <img src="port/03.jpg" alt="Women's Month Recognition" />
+        <h2>Women's Month Recognition</h2>
+        <p>I was featured in JuanaKnow, a Women’s Month campaign that honored my contributions in robotics and technology. It was a proud moment to be celebrated as a young woman breaking barriers and excelling in the STEM field, as I fully embraced my role as a trailblazer.</p>
+      </div>
+    </div>
+
+    <div class="event right" data-date="Apr 29, 2023">
+      <div class="card">
+        <img src="port/04.jpg" alt="STEMAZING Awards" />
+        <h2>STEMAZING and Robotics Awards</h2>
+        <p>The journey continued as I triumphed at the 2023 Division Science and Technology Fair, Robotics Competition cum STEMAZING event. I received multiple awards that reflected my dedication and consistent performance in science and technology.</p>
+      </div>
+    </div>
+
+    <div class="event left" data-date="Jan 27, 2024">
+      <div class="card">
+        <img src="port/05.jpg" alt="Microsoft Youth Ambassador" />
+        <h2>Microsoft Youth Ambassador</h2>
+        <p>I proudly graduated as a Microsoft Youth Ambassador 2.0, earning the 3rd Best Capstone Award in recognition of my commitment and contributions to empowering learners and advancing 21st-century skills. Serving as the Technical Head of Region IV-A CALABARZON at Rizal High School in Pasig.</p>
+      </div>
+    </div>
+
+    <div class="event right" data-date="Feb 24, 2024">
+      <div class="card">
+        <img src="port/06.jpg" alt="Robotics Quest Champion" />
+        <h2>National Robotics Quest Champion</h2>
+        <p>A thrilling triumph unfolded at the 20th National Science Quest Robotics Technology event held at Skyrise Hotel, Baguio. I proudly secured 1st place in three categories: 500g Sumobot, 1kg Sumobot, and Line Tracing.</p>
+      </div>
+    </div>
+
+    <div class="event left" data-date="May 17, 2024">
+      <div class="card">
+        <img src="port/07.png" alt="Research Award" />
+        <h2>Best Research Paper Award</h2>
+        <p>As one of the authors of a team research innovation, I was proud to see our work on sustainable concrete alternatives earn the prestigious Best Research Paper Award at the 4th Student Research Conference held at De La Salle University Dasmariñas - SHS. It was an exhilarating experience that reaffirmed my commitment to creating a better and more sustainable future.</p>
+      </div>
+    </div>
+
+    <div class="event right" data-date="May 31, 2024">
+      <div class="card">
+        <img src="port/08.jpg" alt="Senior High Graduation" />
+        <h2>Senior High Graduation</h2>
+        <p>I graduated with honors from the STEM strand, completing senior high school with flying colors. My accomplishments in both academics and co-curricular activities were celebrated, symbolizing the result of years of dedication, perseverance, and passion. As Taylor Swift once said in her graduation speech, “We are all a patchwork quilt of those who have loved us, those who have believed in our futures”—and in that moment, I carried every lesson, every challenge, and every cheer into the next chapter of my journey.</p>
+      </div>
+    </div>
+
+    <div class="event left" data-date="Jun 27, 2024">
+      <div class="card">
+        <img src="port/09.gif" alt="Meaningful Connection" loading="lazy"/>
+        <h2>A Meaningful Connection</h2>
+        <p>Throughout my academic and tech-driven journey, I had the opportunity to meet Leinad Clark Dela Cruz, who, unbeknownst to me, had been admiring me since Grade 3. Over time, he went from being a supportive friend to becoming my favorite person. With Leinad, I learned how important it is to be emotionally open and how valuable it is to embrace new experiences and adventures. This helped me step outside my usual focus on robotics and research. Our relationship has encouraged me to see things from different perspectives and try new things.</p>
+      </div>
+    </div>
+
+    <div class="event right" data-date="Jul 12, 2024">
+      <div class="card">
+        <img src="port/10.jpg" alt="Robotics Athlete" />
+        <h2>Senior Robotics Athlete</h2>
+        <p>The excitement reached new heights at the Summer Robot Games International Open, where I earned 3rd Runner-Up in the IBEAM Line Tracing – Senior Category. It was another thrilling opportunity to showcase my skills and passion for competitive robotics.</p>
+      </div>
+    </div>
+
+    <div class="event left" data-date="Present">
+      <div class="card">
+        <img src="port/11.png" alt="Perpetualite in Progress" />
+        <h2>Perpetualite in Progress</h2>
+        <p>Now that I’m pursuing a Bachelor of Science in Information Technology with a Specialization in Game Development, I feel like I’m exactly where I’m meant to be. I hope to inspire others to follow their interests in technology, and I’m excited to see where this journey takes me next.</p>
+      </div>
+    </div>
+  </div>
+  <script>
+  const events = document.querySelectorAll('.event');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target); // trigger only once
+      }
+    });
+  }, {
+    threshold: 0.3
+  });
+
+  events.forEach(event => observer.observe(event));
+</script>
+
+</body>
+</html>
